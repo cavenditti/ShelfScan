@@ -24,7 +24,7 @@ and exposes a JSON API for the mobile scanning app. Data is stored in SQLite (Po
 
 ```bash
 cd backend
-pip install -e ".[dev]"
+uv sync --dev
 python main.py
 ```
 
