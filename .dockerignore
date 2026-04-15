@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+node_modules/
+.env
+*.db
+.git/
+.gitmodules
+backend/tests/
+backend/.venv/
+backend/__pycache__/
+backend/invenioscan.egg-info/
+app/.expo/
+memories/
+uploads/
