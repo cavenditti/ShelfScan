@@ -14,11 +14,23 @@ and exposes a JSON API for the mobile scanning app. Data is stored in SQLite (Po
 
 - **OAuth2 password-flow auth** with multi-user registration requiring admin approval.
 - **Book catalog** with title, author, ISBN, arbitrary metadata (`extra` JSON field), and notes.
-- **Shelf management** with unique shelf IDs and labels.
-- **Book copies** — one book can have many physical copies, each tracked to a specific shelf/row/position.
+- **Shelf management** with globally unique shelf IDs and globally unique coordinates (`row`, `position`, `height`).
+- **Book copies** — one book can have many physical copies, each tracked to a specific shelf.
 - **Mobile ingest** — scan a shelf QR code, then scan book barcodes to quickly log positions.
 - **Shelf QR generation** — printable QR code sheets for labelling shelves.
 - **Web UI** — dashboard, book search (HTMX live search), shelf browser, admin user management.
+
+## Data model note
+
+The current shelf model is intentionally simplified: `shelf_id` is globally unique, and the coordinate triplet
+`(row, position, height)` is also globally unique.
+
+If the project grows to support multiple rooms, areas, or buildings, the better shape is:
+
+- a `Location` model
+- `Shelf` belonging to a `Location`
+- a unique constraint on `(row, position, height, location_id)`
+- a unique constraint on `(shelf_id, location_id)`
 
 ## Quick start
 
