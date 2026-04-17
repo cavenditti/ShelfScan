@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShelfScan — Know exactly where every book lives</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    /* ── Landing-specific styles ── */
+    .landing-nav {
+      background: var(--pico-background-color);
+      border-bottom: 2px solid var(--pico-muted-border-color);
+      padding: 0.6rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .landing-nav .brand {
+      color: var(--color-header-link);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .landing-nav .nav-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .landing-nav .nav-link {
+      color: var(--color-header-link);
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+    .landing-nav .nav-link:hover {
+      opacity: 1;
+      color: var(--color-header-link-hover);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem 4rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pico-primary);
+      background: color-mix(in srgb, var(--pico-primary) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--pico-primary) 25%, transparent);
+      border-radius: 999px;
+      padding: 0.3em 0.9em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--pico-color);
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--pico-primary);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--pico-muted-color);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 3rem 0 4rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .feature-card {
+      background: var(--pico-card-background-color);
+      border: 1px solid var(--pico-card-border-color);
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem;
+    }
+    .feature-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--pico-primary) 12%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: var(--pico-primary);
+    }
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--pico-color);
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--pico-muted-color);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ── How it works ── */
+    .how-it-works {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid var(--pico-muted-border-color);
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pico-primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 800;
+      margin-bottom: 0;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      counter-reset: steps;
+    }
+    .step {
+      counter-increment: steps;
+    }
+    .step-number {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: var(--pico-primary);
+      color: var(--pico-primary-inverse);
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .step h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .step p {
+      font-size: 0.87rem;
+      color: var(--pico-muted-color);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* ── CTA banner ── */
+    .cta-banner {
+      background: var(--pico-primary);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 1rem 0 4rem;
+    }
+    .cta-banner h2 {
+      color: var(--pico-primary-inverse);
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+    .cta-banner p {
+      color: color-mix(in srgb, var(--pico-primary-inverse) 75%, transparent);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .btn-pill-inverse {
+      background: var(--pico-primary-inverse);
+      color: var(--pico-primary) !important;
+      border: 2px solid var(--pico-primary-inverse);
+    }
+    .btn-pill-inverse:hover {
+      background: color-mix(in srgb, var(--pico-primary-inverse) 90%, transparent);
+      border-color: color-mix(in srgb, var(--pico-primary-inverse) 90%, transparent);
+    }
+
+    /* ── Landing footer ── */
+    .landing-footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--pico-muted-border-color);
+      color: var(--pico-muted-color);
+      font-size: 0.82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 3.5rem 0.5rem 3rem;
+      }
+      .landing-nav {
+        padding: 0.5rem 1rem;
+      }
+      .cta-banner {
+        padding: 2rem 1.25rem;
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="landing-nav">
+    <a class="brand" href="/">
+      <i class="icon-library"></i> ShelfScan
+    </a>
+    <div class="nav-actions">
+      <a class="nav-link" href="/login">Sign in</a>
+      <a class="btn-pill btn-pill-primary btn-pill-sm" href="/register">Get started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="container">
+    <div class="hero">
+      <h1>Know exactly where <em>every book</em> lives</h1>
+      <p>ShelfScan keeps your library organized,<br> so you always find what you're looking for.</p>
+      <div class="hero-actions">
+        <a class="btn-pill btn-pill-primary" href="/register">Get started — it's free</a>
+        <a class="btn-pill btn-pill-outline" href="/login">Sign in</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="container features">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything your shelves need</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-scan-barcode"></i></div>
+        <h3>Barcode scanning</h3>
+        <p>Scan any ISBN barcode and let ShelfScan fetch the title, author, and cover automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-archive"></i></div>
+        <h3>Shelf management</h3>
+        <p>Organise your shelves, assign positions, and move books between locations in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-qr-code"></i></div>
+        <h3>QR labels</h3>
+        <p>Print QR sheets for your shelves so you can scan a shelf and jump straight to its contents.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-search"></i></div>
+        <h3>Instant search</h3>
+        <p>Find any book by title, author, or ISBN across your entire collection in one keystroke.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="container how-it-works">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create an account</h3>
+        <p>Sign up in seconds — no credit card, no setup fee, no fuss.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Add your shelves</h3>
+        <p>Name your shelves however makes sense to you: room, cabinet, or genre.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Scan your books</h3>
+        <p>Use the standalone scan page to scan barcodes and assign each copy a shelf and slot.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Find anything, fast</h3>
+        <p>Search your library and get the exact shelf location in one tap.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Your library, perfectly organized</h2>
+      <p>Join readers who never lose a book again.</p>
+      <a class="btn-pill btn-pill-inverse" href="/register">Create a free account</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="container landing-footer">
+    ShelfScan &mdash; Book position tracker
+  </footer>
+
+</body>
+</html>

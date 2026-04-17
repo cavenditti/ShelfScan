@@ -1,0 +1,238 @@
+.scan-page-header {
+  margin-bottom: 1.5rem;
+}
+
+.scan-page-copy {
+  max-width: 48rem;
+}
+
+.scan-layout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.6fr) minmax(20rem, 1fr);
+  align-items: start;
+}
+
+.scan-panel {
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 24px;
+  padding: 1.4rem;
+}
+
+.scan-panel-camera {
+  grid-row: span 2;
+}
+
+.scan-panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.scan-panel-header h2 {
+  margin-bottom: 0.25rem;
+}
+
+.scan-panel-header p,
+.scan-metadata summary,
+.scan-capability,
+.scan-summary {
+  margin-bottom: 0;
+}
+
+.scan-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--pico-card-sectioning-background-color);
+  border: 1px solid var(--pico-muted-border-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.scan-summary {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: var(--pico-card-sectioning-background-color);
+  border: 1px solid var(--pico-muted-border-color);
+}
+
+.scan-video-shell {
+  position: relative;
+  min-height: 24rem;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 48%),
+    linear-gradient(180deg, #2f2a22, #15130f 72%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.scan-video {
+  width: 100%;
+  height: 100%;
+  min-height: 24rem;
+  object-fit: cover;
+  display: block;
+}
+
+.scan-video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgba(11, 10, 8, 0.16), rgba(11, 10, 8, 0.46));
+}
+
+.scan-guide-frame {
+  width: min(76%, 26rem);
+  aspect-ratio: 1.45;
+  margin: auto;
+  border-radius: 22px;
+  border: 2px solid rgba(255, 250, 242, 0.88);
+  box-shadow: 0 0 0 999px rgba(18, 16, 12, 0.24);
+}
+
+.scan-guide-copy {
+  color: #fffaf2;
+  max-width: 30rem;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.scan-status {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--pico-muted-border-color);
+  background: var(--pico-card-sectioning-background-color);
+}
+
+.scan-status.is-success {
+  background: var(--color-badge-approved-bg);
+  color: var(--color-badge-approved-text);
+  border-color: transparent;
+}
+
+.scan-status.is-error {
+  background: var(--color-badge-denied-bg);
+  color: var(--color-badge-denied-text);
+  border-color: transparent;
+}
+
+.scan-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.scan-action-row-tight {
+  margin-top: 0.75rem;
+}
+
+.scan-field-grid {
+  margin-top: 1rem;
+}
+
+.scan-metadata {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+  padding-top: 1rem;
+}
+
+.scan-metadata summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.scan-metadata-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.scan-metadata-notes {
+  grid-column: 1 / -1;
+}
+
+.scan-empty-state {
+  padding: 1.2rem;
+  border: 1px dashed var(--pico-muted-border-color);
+  border-radius: 18px;
+  color: var(--pico-muted-color);
+}
+
+.scan-result-list {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.scan-result-list div {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+.scan-result-list div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.scan-result-list dt {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pico-muted-color);
+  margin-bottom: 0.2rem;
+}
+
+.scan-result-list dd {
+  margin: 0;
+}
+
+.scan-result-mono {
+  font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, monospace;
+  word-break: break-all;
+}
+
+@media (max-width: 960px) {
+  .scan-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .scan-panel-camera {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .scan-panel {
+    padding: 1rem;
+  }
+
+  .scan-panel-header {
+    flex-direction: column;
+  }
+
+  .scan-video-shell,
+  .scan-video {
+    min-height: 18rem;
+  }
+
+  .scan-guide-frame {
+    width: 84%;
+  }
+}
