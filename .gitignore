@@ -1,5 +1,7 @@
 app/
 /*.db
 /*.html
+/backend/*.db
+/backend/*.html
 memories/
 uploads/
