@@ -448,14 +448,17 @@
       return;
     }
 
-    elements.capability.textContent = `Live detection is active for ${state.detectorFormats.join(", ")}.`;
+    elements.capability.textContent =
+      mode === "shelf"
+        ? "Live QR detection is active. Point the camera at a shelf QR tag."
+        : "Live barcode detection is active. Point the camera at an ISBN barcode.";
   }
 
   function setZxingCapability(mode) {
     elements.capability.textContent =
       mode === "shelf"
-        ? "Live ZXing detection is active. Point the camera at a shelf QR tag."
-        : "Live ZXing detection is active. Point the camera at an ISBN barcode.";
+        ? "Live QR detection is active. Point the camera at a shelf QR tag."
+        : "Live barcode detection is active. Point the camera at an ISBN barcode.";
   }
 
   function extractZxingText(result) {
@@ -543,7 +546,7 @@
   async function startZxingDecoding(mode) {
     const ReaderClass = getZxingReaderClass();
     if (!ReaderClass) {
-      throw new Error("ZXing fallback is not available in this browser session.");
+      throw new Error("Live scanning is not available in this browser session.");
     }
 
     const stream = getActiveStream();
